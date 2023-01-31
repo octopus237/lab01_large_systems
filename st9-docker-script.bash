@@ -1,6 +1,11 @@
 #!/usr/bin/bash
+
 mkdir containera containerb
-touch containera/index.html containerb/index.html containera.dockerfile containerb.dockerfile docker-compose.yaml
+
+wget https://raw.githubusercontent.com/octopus237/lab01_large_systems/cc35665d66123d4a75d500e9c8c78f8797314be5/containera/index.html -P ./containera
+wget https://raw.githubusercontent.com/octopus237/lab01_large_systems/cc35665d66123d4a75d500e9c8c78f8797314be5/containerb/index.html -P ./containerb
+
+touch containera.dockerfile containerb.dockerfile docker-compose.yaml
 
 cat << EOF > containera.dockerfile
 FROM nginx:1.23.3
@@ -33,3 +38,5 @@ services:
 EOF
 
 docker-compose up -d
+
+echo "ContainerA is accessible on  http://localhost:8080 and containerB on http://localhost:9090"
